@@ -22,6 +22,15 @@ button.addEventListener("click", function() {
          if (pilotName.value === "" || copilotName.value === "" || fuelLevel.value === "" || cargoMass.value === ""){
             alert("You must enter every field.");
          }
+         if (!isNaN(pilotName.value) || pilotName.value === "") {
+            alert('Please enter a valid name using letters only.');
+         } else if (!isNaN(copilotName.value) || copilotName.value === ""){
+            alert('Please enter a valid name using letters only.');
+         } else if (isNaN(fuelLevel)) {
+            alert('Please enter fuel level using numbers only.');
+         } else if (isNaN(cargoMass.value)) {
+            alert('Please enter cargo mass using numbers only.');
+         }
 
       });
 });
