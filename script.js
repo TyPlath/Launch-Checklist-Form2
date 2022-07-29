@@ -52,15 +52,29 @@ window.addEventListener("load", function () {
 
       if (pilotName.value === "" || copilotName.value === "" || fuelLevel.value === "" || cargoMass.value === "") {
          alert('You must enter every field.');
+         itemStatus.style.visibility = "hidden";
+         launchStatus.innerHTML = 'Awaiting Information Before Launch';
+         launchStatus.style.color = 'black';
+         return
       }
       if (!isNaN(pilotName.value) || pilotName.value === "") {
          alert('Please enter a valid pilot name using letters only.');
+         return
       } else if (!isNaN(copilotName.value)) {
          alert('Please enter a valid co-pilot name using letters only.');
+         return
       } else if (isNaN(fuelLevel.value)) {
          alert('Please enter fuel level using numbers only.');
+         itemStatus.style.visibility = "hidden";
+         launchStatus.innerHTML = 'Shuttle not ready for launch.';
+         launchStatus.style.color = "red";
+         return
       } else if (isNaN(cargoMass.value)) {
          alert('Please enter cargo mass using numbers only.');
+         itemStatus.style.visibility = "hidden";
+         launchStatus.innerHTML = 'Shuttle not ready for launch.';
+         launchStatus.style.color = "red";
+         return
       }
 
       pilotStatus.innerHTML = `Our pilot, ${pilotName.value}, is ready.`;
@@ -78,7 +92,7 @@ window.addEventListener("load", function () {
          cargoStatus.innerHTML = `Payload too heavy.`;
          launchStatus.style.color = "red";
          launchStatus.innerHTML = `Shuttle not ready for launch`;
-         itemStatus.style.visibility = "visible";
+         // itemStatus.style.visibility = "visible";
       } else if (pilotName.value === "" || copilotName.value === "" || Number(pilotName.value) === 'number' || Number(copilotName.value) === 'number') {
          launchStatus.style.color = "red";
          launchStatus.innerHTML = `Shuttle not ready for launch`;
