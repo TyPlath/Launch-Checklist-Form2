@@ -4,10 +4,10 @@
 //1. Set up window load handler
 window.addEventListener("load", function () {
 
-//Generates random planet 
+   //Generates random planet 
    const randomButton = document.getElementById("randomButton");
 
-  //JSON fetch
+   //JSON fetch
    fetch("https://handlers.education.launchcode.org/static/planets.json").then(function (response) {
       response.json().then(function (target) {
          const missionTarget = document.getElementById("missionTarget");
@@ -82,17 +82,21 @@ window.addEventListener("load", function () {
       launchStatus.style.color = "red";
       launchStatus.innerHTML = 'Shuttle not ready for launch.';
 
-     //if statements validating levels and input typeof
-     
+      //if statements validating levels and input typeof
+
       if ((fuelLevel.value) < 10000 || cargoMass.value === "") {
+         itemStatus.style.visibility = "visible";
          fuelStatus.innerHTML = `Not enough fuel.`;
          launchStatus.style.color = "red";
          launchStatus.innerHTML = `Shuttle not ready for launch`;
-      } else if (Number(cargoMass.value) > 10000) {
+      }
+      if (Number(cargoMass.value) > 10000) {
+         cargoStatus.style.visibility = "visible";
+         itemStatus.style.visibility = "visible";
          cargoStatus.innerHTML = `Payload too heavy.`;
          launchStatus.style.color = "red";
          launchStatus.innerHTML = `Shuttle not ready for launch`;
-         // itemStatus.style.visibility = "visible";
+
       } else if (pilotName.value === "" || copilotName.value === "" || Number(pilotName.value) === 'number' || Number(copilotName.value) === 'number') {
          launchStatus.style.color = "red";
          launchStatus.innerHTML = `Shuttle not ready for launch`;
@@ -102,10 +106,10 @@ window.addEventListener("load", function () {
          launchStatus.innerHTML = `Shuttle is ready for launch`;
          itemStatus.style.visibility = "visible";
       };
-      if (fuelLevel.value > 10000) {
+      if (fuelLevel.value >= 10000) {
          fuelStatus.innerHTML = "Fuel levels optimal."
       };
-      if (cargoMass.value < 10000) {
+      if (cargoMass.value <= 10000) {
          cargoStatus.innerHTML = "Payload within weight range."
       };
 
