@@ -49,6 +49,8 @@ window.addEventListener("load", function () {
       const cargoStatus = document.getElementById("cargoStatus");
       const launchStatus = document.getElementById("launchStatus");
       const itemStatus = document.getElementById("itemStatus");
+      let fuelReady = false
+      let cargoReady = false
 
       if (pilotName.value === "" || copilotName.value === "" || fuelLevel.value === "" || cargoMass.value === "") {
          alert('You must enter every field.');
@@ -84,38 +86,38 @@ window.addEventListener("load", function () {
 
       //if statements validating levels and input typeof
 
-      if ((fuelLevel.value) < 10000 || cargoMass.value === "") {
+      if (Number(fuelLevel.value) < 10000) {
          itemStatus.style.visibility = "visible";
          fuelStatus.innerHTML = `Not enough fuel.`;
          launchStatus.style.color = "red";
          launchStatus.innerHTML = `Shuttle not ready for launch`;
+      } else {
+         fuelStatus.innerHTML = "Fuel levels optimal."
+         fuelReady = true
       }
+
+
       if (Number(cargoMass.value) > 10000) {
-         cargoStatus.style.visibility = "visible";
          itemStatus.style.visibility = "visible";
          cargoStatus.innerHTML = `Payload too heavy.`;
          launchStatus.style.color = "red";
          launchStatus.innerHTML = `Shuttle not ready for launch`;
+      } else {
+         cargoStatus.innerHTML = "Payload within weight range."
+         cargoReady = true
+      }
 
-      } else if (pilotName.value === "" || copilotName.value === "" || Number(pilotName.value) === 'number' || Number(copilotName.value) === 'number') {
+
+      if (pilotName.value === "" || copilotName.value === "" || Number(pilotName.value) === 'number' || Number(copilotName.value) === 'number') {
          launchStatus.style.color = "red";
          launchStatus.innerHTML = `Shuttle not ready for launch`;
          itemStatus.style.visibility = "hidden";
-      } else if (typeof (pilotName.value) === 'string' && typeof (copilotName.value) === 'string' && typeof (Number(fuelLevel.value)) === 'number' && typeof (Number(cargoMass.value)) === 'number') {
+         return
+      } if (fuelReady && cargoReady) {
          launchStatus.style.color = "green";
          launchStatus.innerHTML = `Shuttle is ready for launch`;
          itemStatus.style.visibility = "visible";
       };
-      if (fuelLevel.value >= 10000) {
-         fuelStatus.innerHTML = "Fuel levels optimal."
-      };
-      if (cargoMass.value <= 10000) {
-         cargoStatus.innerHTML = "Payload within weight range."
-      };
-
    });
 });
 
-/* This block of code shows how to format the HTML once you fetch some planetary JSON!
-
-*/
